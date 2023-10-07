@@ -19,7 +19,7 @@ app.post('/led', function(req, res) {
         mode = GPIO_PI.OUTPUT;
     }
     const led = new GPIO_PI(ledPin, {mode: mode});
-
+    let dutyCycle = 0;
     setInterval(() => {
       led.pwmWrite(dutyCycle);
     
