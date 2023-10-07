@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Raspberry Pi NodeJS server to control GPIO",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/austin-pachecode/model-controller.git"
+  },
+  "keywords": [
+    "RaspberryPi",
+    "Pi",
+    "GPIO"
+  ],
+  "author": "apachecode",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/austin-pachecode/model-controller/issues"
+  },
+  "homepage": "https://github.com/austin-pachecode/model-controller#readme"
+}
