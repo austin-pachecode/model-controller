@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/austin-pachecode/model-controller/issues"
   },
-  "homepage": "https://github.com/austin-pachecode/model-controller#readme"
+  "homepage": "https://github.com/austin-pachecode/model-controller#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
