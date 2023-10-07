@@ -19,6 +19,7 @@ function makeStruct(led, cycle) {
 
 app.get('/ledsOFF', function(req, res) {
   ledList.forEach(led => {
+    led.cycle = clearInterval(led.cycle);
     led.led.pwmWrite(0);
   });
 });
