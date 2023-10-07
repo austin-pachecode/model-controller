@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
 var LED = new Gpio(4, 'out'); //use GPIO pin 4, and specify that it is output
-var blinkInterval = setInterval(blinkLED, 250); //run the blinkLED function every 250ms
+
 
 function blinkLED() { //function to start blinking
   if (LED.readSync() === 0) { //check the pin state, if the state is 0 (or off)
@@ -26,8 +26,8 @@ var hostname = '192.168.0.41';
 var port = 9000;
 
 app.post('/led', function(req, res) {
-    blinkLED();
-    setTimeout(endBlink, 5000);
+    setInterval(blinkLED, 250); //run the blinkLED function every 250ms
+    setTimeout(endBlink, 5000); //stop blinking after 5 seconds
     console.log('receiving data ...');
     console.log('body is ',req.body);
     res.send(req.body);
