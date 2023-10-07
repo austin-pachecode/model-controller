@@ -21,7 +21,6 @@ app.get('/ledsOFF', function(req, res) {
   ledList.forEach(led => {
     led.led.pwmWrite(0);
   });
-    res.send(ledList);
 });
 
 
