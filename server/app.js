@@ -10,6 +10,21 @@ app.use(bodyParser.json())
 var hostname = '192.168.0.41';
 var port = 9000;
 
+var ledList = [];
+
+function makeStruct(led, cycle) {
+  return {led, cycle};
+}
+
+
+app.get('/ledsOFF', function(req, res) {
+  ledList.forEach(led => {
+    led.led.pwmWrite(0);
+  });
+    res.send(ledList);
+});
+
+
 app.post('/led', function(req, res) {
     const ledPin = req.body.ledPin;
     let mode = req.body.mode;
@@ -20,7 +35,7 @@ app.post('/led', function(req, res) {
     }
     const led = new GPIO_PI(ledPin, {mode: mode});
     let dutyCycle = 0;
-    setInterval(() => {
+    const cycle = setInterval(() => {
       led.pwmWrite(dutyCycle);
     
       dutyCycle += 5;
@@ -28,6 +43,8 @@ app.post('/led', function(req, res) {
         dutyCycle = 0;
       }
     }, 20);
+
+    ledList.push(makeStruct(led, cycle));
     console.log('receiving data ...');
     console.log('body is ',req.body);
     res.send(req.body);
