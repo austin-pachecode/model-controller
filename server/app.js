@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 
 const GPIO_PI = require('pigpio').Gpio;
-import { createLed } from './led.js';
+const { createLed } = require( './led.mjs');
 
 
  //stop blinking after 5 seconds
