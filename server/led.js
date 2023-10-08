@@ -3,6 +3,13 @@
  * @module server/led
  */
 
+module.exports = {
+    LED_ACTION: LED_ACTION,
+    cycleLight: cycleLight,
+    setAction: setAction,
+    createLed: createLed
+}
+
 export const LED_ACTION = {
     ON: 'ON',
     OFF: 'OFF',

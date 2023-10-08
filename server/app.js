@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 
 const GPIO_PI = require('pigpio').Gpio;
-const { createLed } = require( './led.mjs');
+var ledFunctions = require( './led');
 
 
  //stop blinking after 5 seconds
@@ -34,7 +34,7 @@ app.get('/ledsOFF/v2', function(req, res) {
   ledList.forEach(led => {
     console.log('led: ', led);
 
-    if(led.mode == LED_ACTION.CYCLE){
+    if(led.mode == ledFunctions.LED_ACTION.CYCLE){
       led.action = clearInterval(led.action);
     }
     led.led.pwmWrite(0);
@@ -51,7 +51,7 @@ app.post('/led/v2', function(req, res) {
       mode = GPIO_PI.OUTPUT;
   }
 
-  const led = createLed(req.body.ledPin, mode, req.body.action);
+  const led = ledFunctions.createLed(req.body.ledPin, mode, req.body.action);
   ledList.push(led);
   console.log('receiving data ...', ledList);
   console.log('body is ',req.body);
