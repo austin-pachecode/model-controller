@@ -3,7 +3,7 @@
  * @module server/led
  */
 
-const LED_ACTION = {
+export const LED_ACTION = {
     ON: 'ON',
     OFF: 'OFF',
     BLINK: 'BLINK',
@@ -11,7 +11,7 @@ const LED_ACTION = {
 };
 
 
-function cycleLight(led){
+export function cycleLight(led){
     let dutyCycle = 0;
     return setInterval(() => {
         led.pwmWrite(dutyCycle);
@@ -24,7 +24,7 @@ function cycleLight(led){
 };
 
 
-function setAction(action, led) {
+export function setAction(action, led) {
     switch(action) {
         case LED_ACTION.ON:
             led.pwmWrite(255);
@@ -42,7 +42,7 @@ function setAction(action, led) {
 }
 
 
-function createLed(pin, mode, action) {
+export function createLed(pin, mode, action) {
     const led = new GPIO_PI(pin, {mode: mode});
     return {
         "led": led,

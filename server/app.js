@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 
 const GPIO_PI = require('pigpio').Gpio;
-const ledFunctions = require('./led.js');
+import { ledFunctions } from './led.js';
 
 
  //stop blinking after 5 seconds
@@ -51,7 +51,7 @@ app.post('/led/v2', function(req, res) {
       mode = GPIO_PI.OUTPUT;
   }
 
-  const led = ledFunctions.createLed(req.body.ledPin, mode, req.body.action);
+  const led = createLed(req.body.ledPin, mode, req.body.action);
   ledList.push(led);
   console.log('receiving data ...', ledList);
   console.log('body is ',req.body);
