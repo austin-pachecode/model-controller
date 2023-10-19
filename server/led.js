@@ -3,12 +3,6 @@
  * @module server/led
  */
 
-module.exports = {
-    LED_ACTION: LED_ACTION,
-    cycleLight: cycleLight,
-    setAction: setAction,
-    createLed: createLed
-}
 
 const LED_ACTION = {
     ON: 'ON',
@@ -49,7 +43,7 @@ function setAction(action, led) {
 }
 
 
-export function createLed(pin, mode, action) {
+function createLed(pin, mode, action) {
     const led = new GPIO_PI(pin, {mode: mode});
     return {
         "led": led,
@@ -57,4 +51,11 @@ export function createLed(pin, mode, action) {
         "mode": mode,
         "action": setAction(action, led)
     }
-}
+};
+
+module.exports = {
+    createLed,
+    setAction,
+    cycleLight,
+    LED_ACTION
+};

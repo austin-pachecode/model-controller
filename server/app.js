@@ -1,15 +1,22 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-
-const GPIO_PI = require('pigpio').Gpio;
+var GPIO_PI;
+try {
+  let e = require('pigpio').Gpio;
+  GPIO_PI = e;
+} catch (error) {
+  //console.log(error)
+}
+ 
 var ledFunctions = require( './led');
+var settings = require('./settings.json')
 
 
  //stop blinking after 5 seconds
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
-var hostname = '192.168.0.41';
+var hostname = settings.hostname;
 var port = 9000;
 
 var ledList = [];
