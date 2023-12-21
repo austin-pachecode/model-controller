@@ -2,7 +2,6 @@
  * @fileoverview This file contains the functions for the led.
  * @module server/led
  */
-
 const LED_ACTION = {
     ON: 'ON',
     OFF: 'OFF',
@@ -33,16 +32,15 @@ function setAction(action, led) {
             led.pwmWrite(0);
             break;
         case LED_ACTION.BLINK:
-            this.cycleLight(led);
+            cycleLight(led);
             break;
         case LED_ACTION.CYCLE:
-            return this.cycleLight(led);
-            break;
+            return cycleLight(led);
     }
-}
+};
 
 
-function createLed(pin, mode, action) {
+function createLed(pin, mode, action, GPIO_PI) {
     const led = new GPIO_PI(pin, {mode: mode});
     return {
         "led": led,
@@ -51,3 +49,10 @@ function createLed(pin, mode, action) {
         "action": setAction(action, led)
     }
 }
+
+module.exports = {
+    createLed,
+    setAction,
+    cycleLight,
+    LED_ACTION
+};

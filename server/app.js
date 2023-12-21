@@ -1,15 +1,15 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var GPIO_PI = require('pigpio').Gpio;
 
-const GPIO_PI = require('pigpio').Gpio;
-const { createLed } = require( './led.js');
-
+var ledFunctions = require( './led');
+var settings = require('./settings.json')
 
  //stop blinking after 5 seconds
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
-var hostname = '192.168.0.41';
+var hostname = settings.hostname;
 var port = 9000;
 
 var ledList = [];
@@ -34,7 +34,7 @@ app.get('/ledsOFF/v2', function(req, res) {
   ledList.forEach(led => {
     console.log('led: ', led);
 
-    if(led.mode == LED_ACTION.CYCLE){
+    if(led.mode == ledFunctions.LED_ACTION.CYCLE){
       led.action = clearInterval(led.action);
     }
     led.led.pwmWrite(0);
@@ -50,8 +50,8 @@ app.post('/led/v2', function(req, res) {
   } else {
       mode = GPIO_PI.OUTPUT;
   }
-
-  const led = createLed(req.body.ledPin, mode, req.body.action);
+  console.log('Pre Create');
+  const led = ledFunctions.createLed(req.body.ledPin, mode, req.body.action, GPIO_PI);
   ledList.push(led);
   console.log('receiving data ...', ledList);
   console.log('body is ',req.body);

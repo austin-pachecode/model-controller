@@ -1,0 +1,29 @@
+{
+    "tiles":[
+        {
+            "id": 0,
+            "name": "Long Home - 2 Medium Homes",
+            "description": "Used for the starting position of Game 1, Middle street short side Long house and 2 medium houses",
+            "actions" : [] 
+        },
+        {
+            "id": 1,
+            "name": "3 Medium Homes - Park",
+            "description": "Middle street short side, 1 medium house - 1 park and 2 medium houses",
+            "actions" : [] 
+        },
+        {
+            "id": 2,
+            "name": "City Center",
+            "description": "Re - L shape middle road",
+            "actions" : [
+                {
+                    "pin": 0,
+                    "description": "Car Alarm",
+                    "action_enum": "FLASH",
+                    "audio": "Car_Alarm.mp3"
+                }
+            ]
+        }
+    ]
+}
